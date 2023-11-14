@@ -1,4 +1,4 @@
-﻿namespace NikolaevNikita_KT_42_20.Filters.StudentFilters
+﻿namespace NikolaevNikita_KT_42_20.Filters
 {
     public class StudentGroupFilter
     {
