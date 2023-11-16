@@ -1,6 +1,7 @@
 ﻿
 using Microsoft.EntityFrameworkCore;
 using NikolaevNikita_KT_42_20.Database;
+using NikolaevNikita_KT_42_20.Filters;
 using NikolaevNikita_KT_42_20.Interfaces.StudentsInterfaces;
 using NikolaevNikita_KT_42_20.Models;
 using NikolaevNikita_KT_42_20.ServiceExtensions;
@@ -68,9 +69,9 @@ namespace NikolaevNikita_KT_42_20.Tests
             await ctx.SaveChangesAsync();
 
             // Act
-            var filter = new Filters.StudentFilters.StudentGroupFilter
+            var filter = new StudentGroupFilter
             {
-                GroupName = "KT-31-20"
+                GroupName = "KT-42-20"
             };
             var studentsResult = await studentService.GetStudentsByGroupAsync(filter, CancellationToken.None);
 

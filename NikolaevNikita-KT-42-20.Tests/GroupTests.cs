@@ -1,4 +1,4 @@
-﻿using NikolaevNikita_KT_42_20.Models
+﻿using NikolaevNikita_KT_42_20.Models;
 namespace NikolaevNikita_KT_42_20.Tests
 {
     public class GroupTests
