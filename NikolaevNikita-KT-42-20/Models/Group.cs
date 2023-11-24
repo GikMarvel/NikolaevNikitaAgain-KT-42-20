@@ -6,7 +6,7 @@ namespace NikolaevNikita_KT_42_20.Models
     {
         public int GroupId { get; set; }
 
-        public string GroupName { get; set; }
+        public string? GroupName { get; set; }
 
         public bool IsValidGroupName()
         {

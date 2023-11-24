@@ -1,9 +1,8 @@
-﻿using NikolaevNikita_KT_42_20.Filters;
-using NikolaevNikita_KT_42_20.Interfaces.StudentsInterfaces;
+﻿using NikolaevNikita_KT_42_20.Interfaces.StudentsInterfaces;
 using NikolaevNikita_KT_42_20.Models;
 using NikolaevNikita_KT_42_20.Database;
 using Microsoft.AspNetCore.Mvc;
-
+using NikolaevNikita_KT_42_20.Filters.StudentFilters;
 
 namespace NikolaevNikita_KT_42_20.Controllers
 {
@@ -11,7 +10,6 @@ namespace NikolaevNikita_KT_42_20.Controllers
     [Route("[controller]")]
     public class StudentsController : ControllerBase
     {
-
         private readonly ILogger<StudentsController> _logger;
         private readonly IStudentService _studentService;
         private StudentDbContext _context;
@@ -23,8 +21,7 @@ namespace NikolaevNikita_KT_42_20.Controllers
             _context = context;
         }
 
-
-        [HttpPost(Name = "GetStudentsByGroup")]
+        [HttpPost("GetStudentsByGroup")]
         public async Task<IActionResult> GetStudentsByGroupAsync(StudentGroupFilter filter, CancellationToken cancellationToken = default)
         {
             var students = await _studentService.GetStudentsByGroupAsync(filter, cancellationToken);
@@ -32,7 +29,23 @@ namespace NikolaevNikita_KT_42_20.Controllers
             return Ok(students);
         }
 
-        [HttpPost("AddStudent", Name = "AddStudent")]
+        [HttpPost("GetStudentsByFIO")]
+        public async Task<IActionResult> GetStudentsByFIOAsync(StudentFIOFilter filter, CancellationToken cancellationToken = default)
+        {
+            var students = await _studentService.GetStudentsByFIOAsync(filter, cancellationToken);
+
+            return Ok(students);
+        }
+
+        [HttpPost("GetStudentsByIsDeleted")]
+        public async Task<IActionResult> GetStudentsByIsDeletedAsync(StudentIsDeletedFilter filter, CancellationToken cancellationToken = default)
+        {
+            var students = await _studentService.GetStudentsByIsDeletedAsync(filter, cancellationToken);
+
+            return Ok(students);
+        }
+
+        [HttpPost("AddStudent")]
         public IActionResult CreateStudent([FromBody] Student student)
         {
             if (!ModelState.IsValid)
@@ -46,19 +59,36 @@ namespace NikolaevNikita_KT_42_20.Controllers
         }
 
         [HttpPut("EditStudent")]
-        public IActionResult UpdateStudent(string firstname, [FromBody] Student updatedStudent)
+        public IActionResult UpdateStudent(string surname, [FromBody] Student updatedStudent)
         {
-            var existingStudent = _context.Students.FirstOrDefault(g => g.FirstName == firstname);
+            var existingStudent = _context.Students.FirstOrDefault(g => g.Surname == surname);
 
             if (existingStudent == null)
             {
                 return NotFound();
             }
 
-            existingStudent.FirstName = updatedStudent.FirstName;
-            existingStudent.LastName = updatedStudent.LastName;
-            existingStudent.MiddleName = updatedStudent.MiddleName;
+            existingStudent.Surname = updatedStudent.Surname;
+            existingStudent.Name = updatedStudent.Name;
+            existingStudent.Midname = updatedStudent.Midname;
             existingStudent.GroupId = updatedStudent.GroupId;
+            existingStudent.IsDeleted = updatedStudent.IsDeleted;
+            _context.SaveChanges();
+
+            return Ok();
+        }
+
+        [HttpDelete("DeleteStudent")]
+        public IActionResult DeleteStudent(string surname, [FromBody] Student deletedStudent)
+        {
+            var existingStudent = _context.Students.FirstOrDefault(g => g.Surname == surname);
+
+            if (existingStudent == null)
+            {
+                return NotFound();
+            }
+            existingStudent.IsDeleted = true;
+            //_context.Students.Remove(existingStudent);
             _context.SaveChanges();
 
             return Ok();
