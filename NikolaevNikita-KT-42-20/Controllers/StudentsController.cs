@@ -93,49 +93,5 @@ namespace NikolaevNikita_KT_42_20.Controllers
 
             return Ok();
         }
-
-        [HttpPost("AddGroup", Name = "AddGroup")]
-        public IActionResult CreateGroup([FromBody] NikolaevNikita_KT_42_20.Models.Group group)
-        {
-            if (!ModelState.IsValid)
-            {
-                return BadRequest(ModelState);
-            }
-
-            _context.Groups.Add(group);
-            _context.SaveChanges();
-            return Ok(group);
-        }
-
-        [HttpPut("EditGroup")]
-        public IActionResult UpdateGroup(string groupname, [FromBody] StudentGroupFilter updatedGroup)
-        {
-            var existingGroup = _context.Groups.FirstOrDefault(g => g.GroupName == groupname);
-
-            if (existingGroup == null)
-            {
-                return NotFound();
-            }
-
-            existingGroup.GroupName = updatedGroup.GroupName;
-            _context.SaveChanges();
-
-            return Ok();
-        }
-
-        [HttpDelete("DeleteGroup")]
-        public IActionResult DeleteGroup(string groupName, NikolaevNikita_KT_42_20.Models.Group updatedGroup)
-        {
-            var existingGroup = _context.Groups.FirstOrDefault(g => g.GroupName == groupName);
-
-            if (existingGroup == null)
-            {
-                return NotFound();
-            }
-            _context.Groups.Remove(existingGroup);
-            _context.SaveChanges();
-
-            return Ok();
-        }
     }
 }

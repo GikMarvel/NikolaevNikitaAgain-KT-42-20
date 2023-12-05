@@ -9,7 +9,8 @@ namespace NikolaevNikita_KT_42_20.Tests
             //arrange
             var testGroup = new Group
             {
-                GroupName = "KT-31-20"
+                GroupName = "KT-31-20",
+                GroupId = 1
             };
 
             //act

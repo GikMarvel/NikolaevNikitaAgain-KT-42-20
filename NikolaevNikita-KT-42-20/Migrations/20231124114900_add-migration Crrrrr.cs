@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace NikolaevNikita_KT_42_20.Migrations
 {
     /// <inheritdoc />
-    public partial class Cret : Migration
+    public partial class addmigrationCrrrrr : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -17,7 +17,9 @@ namespace NikolaevNikita_KT_42_20.Migrations
                 {
                     group_id = table.Column<int>(type: "int", nullable: false, comment: "Идентификатор записи группы")
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    c_group_name = table.Column<string>(type: "nvarchar(Max)", maxLength: 100, nullable: false, comment: "Название группы")
+                    c_group_name = table.Column<string>(type: "nvarchar(Max)", maxLength: 100, nullable: false, comment: "Название группы"),
+                    GroupYear = table.Column<int>(type: "int", nullable: true),
+                    IsDeleted = table.Column<bool>(type: "bit", nullable: false)
                 },
                 constraints: table =>
                 {

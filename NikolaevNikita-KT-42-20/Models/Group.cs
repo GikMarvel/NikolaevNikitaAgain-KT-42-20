@@ -8,6 +8,10 @@ namespace NikolaevNikita_KT_42_20.Models
 
         public string? GroupName { get; set; }
 
+        public int? GroupYear { get; set; }
+
+        public bool IsDeleted { get; set; }
+
         public bool IsValidGroupName()
         {
             return Regex.Match(GroupName, @"\D*-\d*-\d\d").Success;

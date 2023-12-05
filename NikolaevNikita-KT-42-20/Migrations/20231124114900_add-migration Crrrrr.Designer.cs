@@ -12,8 +12,8 @@ using NikolaevNikita_KT_42_20.Database;
 namespace NikolaevNikita_KT_42_20.Migrations
 {
     [DbContext(typeof(StudentDbContext))]
-    [Migration("20231124080756_Cret")]
-    partial class Cret
+    [Migration("20231124114900_add-migration Crrrrr")]
+    partial class addmigrationCrrrrr
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -132,6 +132,12 @@ namespace NikolaevNikita_KT_42_20.Migrations
                         .HasColumnType("nvarchar(Max)")
                         .HasColumnName("c_group_name")
                         .HasComment("Название группы");
+
+                    b.Property<int?>("GroupYear")
+                        .HasColumnType("int");
+
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("bit");
 
                     b.HasKey("GroupId")
                         .HasName("pk_cd_group_group_id");
