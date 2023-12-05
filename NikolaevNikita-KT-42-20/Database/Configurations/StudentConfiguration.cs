@@ -27,19 +27,19 @@ namespace NikolaevNikita_KT_42_20.Database.Configurations
                 .HasComment("Идентификатор записи студента");
 
             //HasComment добавит комментарий, который будет отображаться в СУБД (добавлять по желанию)
-            builder.Property(p => p.FirstName)
+            builder.Property(p => p.Surname)
                 .IsRequired()
                 .HasColumnName("c_student_firstname")
                 .HasColumnType(ColumnType.String).HasMaxLength(100)
                 .HasComment("Имя студента");
 
-            builder.Property(p => p.LastName)
+            builder.Property(p => p.Name)
                 .IsRequired()
                 .HasColumnName("c_student_lastname")
                 .HasColumnType(ColumnType.String).HasMaxLength(100)
                 .HasComment("Фамилия студента");
 
-            builder.Property(p => p.MiddleName)
+            builder.Property(p => p.Midname)
                 .HasColumnName("c_student_middlename")
                 .HasColumnType(ColumnType.String).HasMaxLength(100)
                 .HasComment("Отчество студента");

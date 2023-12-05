@@ -1,5 +1,7 @@
 using Microsoft.EntityFrameworkCore;
 using NikolaevNikita_KT_42_20.Database;
+using NikolaevNikita_KT_42_20.Middlewares;
+using NikolaevNikita_KT_42_20.ServiceExtensions;
 using NLog;
 using NLog.Web;
 
@@ -19,6 +21,7 @@ try
     builder.Services.AddDbContext<StudentDbContext>(options =>
       options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
 
+    builder.Services.AddServices();
     var app = builder.Build();
 
     // Configure the HTTP request pipeline.
@@ -27,6 +30,8 @@ try
         app.UseSwagger();
         app.UseSwaggerUI();
     }
+
+    app.UseMiddleware<ExceptionHandlerMiddleware>();
 
     app.UseAuthorization();
 
